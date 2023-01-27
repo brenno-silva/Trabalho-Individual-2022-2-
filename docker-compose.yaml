@@ -15,6 +15,16 @@ services:
     volumes:
       - postgres_data:/data/postgres
 
+  metabase:
+    image: 'metabase/metabase'
+    env_file:
+      - ./metabase/config/metabase_database_exemple.env
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+      - mongoDB
+
 volumes:
   mongo_data:
   postgres_data:
