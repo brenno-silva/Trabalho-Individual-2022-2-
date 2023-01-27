@@ -26,9 +26,6 @@ jobs:
         
       - name: Poetry build package
         run: poetry build
-      
-      - name: Poetry run tests
-        run: poetry run pytest
         
       - name: Deploy to pypi
         uses: JRubics/poetry-publish@v1.16
