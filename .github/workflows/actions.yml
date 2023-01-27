@@ -34,7 +34,7 @@ jobs:
           python_version: "3.8.16"
 
       - name: Generating doxygen xml
-        run: doxygen
+        uses: mattnotmitt/doxygen-action@v1.9.5
         
       - name: Sphinx file generation
-        run: sphinx-build -b html source/ docs/
+        run: poetry run sphinx-build -b html source/ docs/
