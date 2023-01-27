@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  mongoDB:
+    image: 'mongo'
+    env_file:
+      - ./metabase/config/mongo_exemple.env
+    volumes:
+      - mongo_data:/data/mongo
+
+  postgres:
+    image: 'postgres'
+    env_file:
+      - ./metabase/config/postgres_exemple.env
+    volumes:
+      - postgres_data:/data/postgres
+
+volumes:
+  mongo_data:
+  postgres_data:
