@@ -31,6 +31,7 @@ jobs:
         uses: JRubics/poetry-publish@v1.16
         with:
           pypi_token: ${{ secrets.PYPI_TOKEN }}
+          python_version: "3.8.16"
 
       - name: Generating doxygen xml
         run: doxygen
