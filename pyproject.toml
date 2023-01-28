@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gces-trabalho-individual-2022-2"
-version = "0.0.0"
+version = "1.0.0"
 description = ""
 authors = ["brenno-silva <brenno.silva037@gmail.com>"]
 readme = "README.md"
