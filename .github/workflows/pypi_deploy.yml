@@ -1,5 +1,7 @@
-name: CI - pypi
-on: release
+name: CI - pypi deploy
+on: 
+  release:
+    types: [published]
 
 jobs:
   pypi:
