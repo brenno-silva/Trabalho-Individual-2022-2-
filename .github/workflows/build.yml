@@ -1,4 +1,4 @@
-name: CI - Build and Test
+name: CI - Build
 on: push
 
 jobs:
@@ -26,12 +26,6 @@ jobs:
         
       - name: Poetry build package
         run: poetry build
-        
-      - name: Deploy to pypi
-        uses: JRubics/poetry-publish@v1.16
-        with:
-          pypi_token: ${{ secrets.PYPI_TOKEN }}
-          python_version: "3.8.16"
 
       - name: Generating doxygen xml
         uses: mattnotmitt/doxygen-action@v1.9.5
