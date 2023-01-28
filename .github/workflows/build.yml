@@ -1,6 +1,8 @@
 name: CI - Build
 on: push
-
+permissions:
+  contents: write
+  
 jobs:
   poetry:
     strategy:
@@ -24,6 +26,15 @@ jobs:
       - name: Poetry install requirements
         run: poetry install
         
+      - name: Poetry tests
+        run: poetry run pytest --cov
+        
+      - name: Running mypy
+        run: poetry run mypy src/
+        
+      - name: Running pylint
+        run: poetry run pylint src/
+        
       - name: Poetry build package
         run: poetry build
 
@@ -33,10 +44,7 @@ jobs:
       - name: Sphinx file generation
         run: poetry run sphinx-build -b html source/ docs/
       
-      - name: Sending to gitpages
-        uses: peaceiris/actions-gh-pages@v3
+      - uses: seanzhengw/sphinx-pages@master
         with:
-          publish_branch: gh-pages
-          github_token: ${{ secrets.MY_TOKEN }}
-          publish_dir: docs/
-          force_orphan: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          create_readme: false
