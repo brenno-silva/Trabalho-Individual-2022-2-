@@ -1,7 +1,7 @@
-name: CI - pypi deploy
+name: CI - pypi
 on: 
   release:
-    types: [published]
+    types: [released]
 
 jobs:
   pypi:
@@ -23,8 +23,11 @@ jobs:
         with:
           poetry-version: ${{ matrix.poetry-version }}
         
-      - name: Deploy to pypi
-        uses: JRubics/poetry-publish@v1.16
-        with:
-          pypi_token: ${{ secrets.PYPI_TOKEN }}
-          python_version: "3.8.16"
+      - name: Config poetry token
+        run: "poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}"
+      
+      - name: Poetry build
+        run: "poetry build"
+        
+      - name: Poetry publish
+        run: "poetry publish"
