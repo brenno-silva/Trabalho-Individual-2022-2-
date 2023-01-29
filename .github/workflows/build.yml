@@ -40,11 +40,15 @@ jobs:
 
       - name: Generating doxygen xml
         uses: mattnotmitt/doxygen-action@v1.9.5
-        
-      - name: Sphinx file generation
-        run: poetry run sphinx-build -b html source/ docs/
       
-      - uses: seanzhengw/sphinx-pages@master
+      - name: Sphinx build
+        run: "poetry run sphinx-build -b html source/ docs/"
+      
+      - name: Sphinx deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         with:
+          publish_branch: gh-pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          create_readme: false
+          publish_dir: docs/
+          force_orphan: true
